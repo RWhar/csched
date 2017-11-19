@@ -8,9 +8,11 @@ import (
 
 func TestMyClock_Now(t *testing.T) {
 	clock := specparser.ClockInterface{}
+	expected := clock.Now().Format("1970-12-23 14:05:04")
+	actual := time.Now().Format("1970-12-23 14:05:04")
 
-	if clock.Now() != time.Now() {
-		t.Error("time should match")
+	if expected != actual {
+		t.Error("time should match", expected, actual)
 	}
 }
 
