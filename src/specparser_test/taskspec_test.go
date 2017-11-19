@@ -99,6 +99,20 @@ func TestTaskSpec_HasDayOfWeek(t *testing.T) {
 
 }
 
+func TestTaskSpec_HasDayOfWeekConvertsZero(t *testing.T) {
+	taskSpec := specparser.TaskSpec{
+		Schedule: specparser.TimeSpecExtended{
+			DaysOfWeek: []specparser.TimeUnit{
+				specparser.DayOfWeek(7),
+			},
+		},
+	}
+
+	if !taskSpec.HasDayOfWeek(0) {
+		t.Error("should match as DoW 0 should be interpreted as day 7 - Sunday")
+	}
+}
+
 func TestTaskSpec_New(t *testing.T) {
 	_, err := specparser.NewTaskSpec("* * * * * command")
 

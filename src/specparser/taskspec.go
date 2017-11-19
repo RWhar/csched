@@ -85,6 +85,11 @@ func (s *TaskSpec) HasMonth(month Month) bool {
 }
 
 func (s *TaskSpec) HasDayOfWeek(dayOfWeek DayOfWeek) bool {
+	// Handle zero as sunday
+	if dayOfWeek == 0 {
+		dayOfWeek = 7
+	}
+
 	for i := range s.Schedule.DaysOfWeek {
 		if s.Schedule.DaysOfWeek[i] == dayOfWeek {
 			return true
